@@ -1,0 +1,117 @@
+%% Chapter 1: boxes
+\chapter{Boxes}
+%
+% ============================================================
+% Numbered boxes
+%   \begin{defbox}{Title}{label} ... \end{defbox}
+%   - numbered per section, sharing one counter across all box types
+%   - referenced with \ref{<prefix>:label}, e.g. \ref{def:vector_space}
+%   - listed in the index at the end of the notes
+%   - the starred form \begin{defbox*}{Title} is unnumbered and not indexed
+%
+%   Box         Title          Prefix   Needs
+%   defbox      Definition     def
+%   stbox       Setup          st
+%   exbox       Example        ex
+%   agrbox      Algorithm      agr
+%   tecbox      Technique      tec
+%   asmpbox     Assumption     asmp     (own counter, not in the index)
+%   lembox      Lemma          lem      math
+%   thmbox      Theorem        thm      math
+%   prpbox      Proposition    prp      math
+%   fctbox      Fact           fct      math
+%   solbox      Optimization Solution  sol  math
+%   codebox     Code Snippet   code     code
+%
+% Inside any box, \tcbline draws a separator (e.g. between a statement and its proof).
+% \deftxt{term} typesets a newly defined term in bold italics.
+% ============================================================
+\section{Definitions and Examples}
+%
+\begin{defbox}{Vector Space}{vector_space}
+A \deftxt{vector space} over $\R$ is a set $V$ with an addition $V\times V\to V$ and a scalar multiplication $\R\times V\to V$ such that:
+\begin{itemize}
+    \item $(V,+)$ is an abelian group;
+    \item scalar multiplication is compatible with the field operations:
+    \begin{itemize}
+        \item $a(b\bs v)=(ab)\bs v$ and $1\bs v=\bs v$;
+        \item $a(\bs u+\bs v)=a\bs u+a\bs v$ and $(a+b)\bs v=a\bs v+b\bs v$.
+    \end{itemize}
+\end{itemize}
+\end{defbox}
+%
+\begin{exbox}{Euclidean Space}{euclid}
+$\R^n$ with component-wise addition and scalar multiplication is a vector space in the sense of Definition \ref{def:vector_space}.
+\end{exbox}
+%
+\begin{stbox}{Consumer Problem}{consumer}
+A consumer with income $m>0$ faces prices $\bs p\in\R^n_{++}$ and solves
+\[
+\max_{\bs x\in\R^n_+} u(\bs x)\st \bs p\cdot\bs x\le m.
+\]
+\end{stbox}
+%
+\begin{defbox*}{An Unnumbered Definition}
+The starred form has no number, no label and no index entry.
+\end{defbox*}
+%
+\section{Results and Proofs}
+%
+\begin{lembox}{Triangle Inequality}{triangle}
+For all $x,y\in\R$, $\abs{x+y}\le\abs{x}+\abs{y}$.
+\end{lembox}
+%
+\begin{thmbox}{Reverse Triangle Inequality}{rev_triangle}
+For all $x,y\in\R$,
+\[
+\abs[\big]{\abs{x}-\abs{y}}\le\abs{x-y}.
+\]
+\tcbline
+\begin{proof}
+By Lemma \ref{lem:triangle}, $\abs{x}=\abs{(x-y)+y}\le\abs{x-y}+\abs{y}$, so $\abs{x}-\abs{y}\le\abs{x-y}$. Swapping $x$ and $y$ gives $\abs{y}-\abs{x}\le\abs{x-y}$.
+\end{proof}
+\end{thmbox}
+%
+\begin{prpbox}{Solution of the Consumer Problem}{consumer_sol}
+In Setup \ref{st:consumer}, if $u$ is continuous, a solution exists.
+\tcbline
+\begin{proof}
+The budget set $\cb{\bs x\in\R^n_+:\bs p\cdot\bs x\le m}$ is closed and bounded, hence compact, and a continuous function attains its maximum on a compact set.
+\end{proof}
+\end{prpbox}
+%
+\begin{fctbox}{Geometric Series}{geom}
+For $\abs{r}<1$, $\sum_{t=0}^\infty r^t=\frac{1}{1-r}$.
+\end{fctbox}
+%
+\section{Other Boxes}
+%
+% asmpbox: numbered within each section with its own counter
+\begin{asmpbox}{Preferences}{pref}
+$u$ is continuous, strictly increasing and strictly quasi-concave.
+\end{asmpbox}
+%
+\begin{agrbox}{Bisection}{bisection}
+\begin{enumerate}
+    \item Start with $a<b$ such that $f(a)f(b)<0$.
+    \item Let $c=(a+b)/2$. If $f(a)f(c)<0$ set $b=c$, otherwise set $a=c$.
+    \item Repeat until $b-a$ is below the tolerance.
+\end{enumerate}
+\end{agrbox}
+%
+\begin{tecbox}{Guess and Verify}{guess}
+Guess a functional form with unknown coefficients, plug it into the equation and solve for the coefficients.
+\end{tecbox}
+%
+% genbox: a general box with a free title, not numbered or indexed
+\begin{genbox}{A General Box}
+Use \texttt{genbox} for anything that does not fit the numbered types.
+\end{genbox}
+%
+\begin{notebox}
+Use \texttt{notebox} for remarks and warnings.
+\end{notebox}
+%
+\begin{refbox}
+Use \texttt{refbox} for quotes or references to other material.
+\end{refbox}

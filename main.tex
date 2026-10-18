@@ -1,0 +1,40 @@
+% ============================================================
+% amznotes.cls usage demo
+%
+% Build: latexmk -xelatex -shell-escape main.tex
+%   (latexmk runs XeLaTeX, Biber and the extra passes needed for
+%    the table of contents, the index and the "X of Y" footer)
+%
+% Class options (combine with commas):
+%   math         theorem-like boxes (lembox, thmbox, prpbox, fctbox, solbox),
+%                the proof environment and the math macros
+%   code         loads minted (needs -shell-escape and Python Pygments);
+%                enables codebox, amzcode and \amzinputcode
+%   fastcompile  drops chapter banners, headers and box styling for quicker drafts
+% ============================================================
+\documentclass[math,code]{amznotes}
+% \documentclass[math,code,fastcompile]{amznotes}   % quick draft
+
+\addbibresource{ref.bib}
+
+\begin{document}
+
+% ------------------------------------------------------------
+% Cover page: \coverpage{title}{author}{date}
+% It prints "author on date" under the title.
+% ------------------------------------------------------------
+\coverpage{Course Name}{Notes by Your Name}{\today}
+
+\tableofcontents
+
+% One file per chapter keeps long notes manageable
+\input{ch1.tex}
+\input{ch2.tex}
+
+% Bibliography from ref.bib; prints nothing if nothing is cited
+\printbibliography
+
+% Index of every numbered box, grouped by type (Definitions, Theorems, ...)
+\amzindex
+
+\end{document}
